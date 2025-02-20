@@ -1,0 +1,1 @@
+export {ProductRegister} from './register'
