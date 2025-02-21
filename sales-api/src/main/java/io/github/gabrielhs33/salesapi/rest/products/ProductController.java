@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductController {
 
     @PostMapping
-     public ProductFormRequest save( @RequestBody ProductFormRequest product){
+    public ProductFormRequest save (@RequestBody  ProductFormRequest product){
 
         System.out.println(product);
-         return product;
-     }
+        return product;
+    }
 }
