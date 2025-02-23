@@ -18,8 +18,19 @@ public class Product {
     private String description;
     @Column
     private String sku;
-    @Column(name="price", precision = 2, scale = 16)
+    @Column(precision = 16, scale = 2)
     private BigDecimal price;
+
+    public Product(){
+        super();
+    }
+
+    public Product(String name, String description, String sku, BigDecimal price) {
+        this.name = name;
+        this.description = description;
+        this.sku = sku;
+        this.price = price;
+    }
 
     public long getId() {
         return id;
