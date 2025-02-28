@@ -12,9 +12,9 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column
+    @Column(scale = 100)
     private String name;
-    @Column
+    @Column(scale = 255)
     private String description;
     @Column
     private String sku;
