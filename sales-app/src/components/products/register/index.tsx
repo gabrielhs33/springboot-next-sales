@@ -1,13 +1,26 @@
 import { Layout } from "components";
 import { useState } from "react";
 import { Input } from "components";
+import { useProductService } from 'app/services'
+import { Product } from 'app/models/products'
 
 export const ProductRegister:React.FC = () =>{
 
+    const service = useProductService()
     const [sku, setSku] = useState('')
     const [price, setPrice] = useState('')
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
+
+    const submit = () =>{ 
+        const product: Product = {
+            sku,
+            price: parseFloat(price),
+            name,
+            description
+        }
+        service.save(product).then(productResponse => console.log(product))
+    }
 
     return(
        <Layout title = "Produtos">
@@ -40,7 +53,7 @@ export const ProductRegister:React.FC = () =>{
 
             <div className="field is-grouped">
                 <div className="control">
-                    <button className="button is-link"> Salvar </button>
+                    <button onClick={submit} className="button is-link"> Salvar </button>
                 </div>
                 <div className="control is-link">
                     <button className="button"> Voltar </button>

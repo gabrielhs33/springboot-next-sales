@@ -3,6 +3,7 @@ package io.github.gabrielhs33.salesapi.model;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Table
@@ -10,7 +11,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(scale = 100)
     private String name;
@@ -20,9 +21,19 @@ public class Product {
     private String sku;
     @Column(precision = 16, scale = 2)
     private BigDecimal price;
+    @Column(name="registration_date")
+    private LocalDate registrationDate;
 
     public Product(){
         super();
+    }
+
+    public Product(Long id, String name, String description, String sku, BigDecimal price) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.sku = sku;
+        this.price = price;
     }
 
     public Product(String name, String description, String sku, BigDecimal price) {
@@ -32,7 +43,21 @@ public class Product {
         this.price = price;
     }
 
-    public long getId() {
+    public LocalDate getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(LocalDate registrationDate) {
+        this.registrationDate = registrationDate;
+    }
+
+    @PrePersist
+    public void prePersist(){
+
+        setRegistrationDate(LocalDate.now());
+    }
+
+    public Long getId() {
         return id;
     }
 
