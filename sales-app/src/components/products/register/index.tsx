@@ -11,6 +11,9 @@ export const ProductRegister:React.FC = () =>{
     const [price, setPrice] = useState('')
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
+    const [id, setId] = useState<string>()
+    const [registration, setRegistration] = useState<string>()
+
 
     const submit = () =>{ 
         const product: Product = {
@@ -19,22 +22,36 @@ export const ProductRegister:React.FC = () =>{
             name,
             description
         }
-        service.save(product).then(productResponse => console.log(product))
+        service.save(product)
+        .then(productResponse => {
+            setId(productResponse.id)
+            setRegistration(productResponse.registration)
+        })
     }
 
     return(
        <Layout title = "Produtos">
+        
+            { id &&
 
+                <div className="columns">
+
+                    <Input id="inputCodigo" value={id} label="Código: " columnClass="is-half" disabled/>
+
+                    <Input id="inputDate" value={registration} label="Data de cadastro: " columnClass="is-half" disabled/>
+
+                </div>
+            }
             <div className="columns">
 
                 <Input id="inputSKU" label="SKU *" columnClass="is-half" onChange={setSku} placeholder="Digite o SKU do produto"/>
 
-                <Input id="inputPrice" label="Preço *" columnClass="is-half" onChange={setSku} placeholder="Digite o Preço do produto"/>
+                <Input id="inputPrice" label="Preço *" columnClass="is-half" onChange={setPrice} placeholder="Digite o Preço do produto"/>
             
             
             </div>
             <div className="columns">
-                <Input id="inputName" label="Nome *" columnClass="is-full" onChange={setSku} placeholder="Digite o Nome do produto"/>
+                <Input id="inputName" label="Nome *" columnClass="is-full" onChange={setName} placeholder="Digite o Nome do produto"/>
             </div>
             <div className="columns">
                 <div className="column is-full">

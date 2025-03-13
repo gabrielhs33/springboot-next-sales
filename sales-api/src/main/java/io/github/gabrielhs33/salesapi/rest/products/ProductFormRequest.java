@@ -14,7 +14,7 @@ public class ProductFormRequest {
     private String sku;
     private BigDecimal price;
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate registarion;
+    private LocalDate registration;
 
     public ProductFormRequest(Long id, String description,
                               String name, String sku,
@@ -25,7 +25,7 @@ public class ProductFormRequest {
         this.name = name;
         this.sku = sku;
         this.price = price;
-        this.registarion = registration;
+        this.registration = registration;
     }
 
     public ProductFormRequest() {
@@ -90,11 +90,11 @@ public class ProductFormRequest {
     }
 
     public LocalDate getRegistarion() {
-        return registarion;
+        return registration;
     }
 
-    public void setRegistarion(LocalDate registarion) {
-        this.registarion = registarion;
+    public void setRegistarion(LocalDate registration) {
+        this.registration = registration;
     }
 
     @Override
