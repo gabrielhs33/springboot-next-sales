@@ -17,10 +17,16 @@ export const ProductRegister:React.FC = () =>{
 
     const submit = () =>{ 
         const product: Product = {
+            id,
             sku,
             price: parseFloat(price),
             name,
             description
+        }
+        if(id){
+
+            service.update(product)
+            .then(response => console.log("atualizado"))
         }
         service.save(product)
         .then(productResponse => {
@@ -70,8 +76,11 @@ export const ProductRegister:React.FC = () =>{
 
             <div className="field is-grouped">
                 <div className="control">
-                    <button onClick={submit} className="button is-link"> Salvar </button>
+                    <button onClick={submit} className="button is-link">   
+                         {id ? "Atualizar" : "Salvar"}                   
+                    </button>
                 </div>
+             
                 <div className="control is-link">
                     <button className="button"> Voltar </button>
                 </div>
