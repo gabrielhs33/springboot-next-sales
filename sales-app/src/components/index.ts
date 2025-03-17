@@ -1,4 +1,4 @@
 export { Layout } from './layout'
-export { ProductRegister } from './products'
+export { ProductRegister, ProductListing} from './products'
 export { Input } from './common'
 export { Message } from './common'

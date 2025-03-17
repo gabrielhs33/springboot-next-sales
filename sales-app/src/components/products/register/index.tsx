@@ -4,6 +4,7 @@ import { useProductService } from 'app/services'
 import { Product } from 'app/models/products'
 import { convertToBigDecimal } from 'app/util/money'
 import { Alert } from 'components/common/messages'
+import Link from "next/link";
 import * as yup from 'yup'
 
 const msgCampoObrigatorio = "Campo obrigatorio";
@@ -146,7 +147,9 @@ export const ProductRegister:React.FC = () =>{
                 </div>
              
                 <div className="control is-link">
-                    <button className="button"> Voltar </button>
+                    <Link href="/queries/products">
+                        <button className="button"> Voltar </button>
+                    </Link>
                 </div>
             </div>
        </Layout>
