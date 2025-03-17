@@ -4,8 +4,16 @@ import { useProductService } from 'app/services'
 import { Product } from 'app/models/products'
 import { convertToBigDecimal } from 'app/util/money'
 import { Alert } from 'components/common/messages'
-import { text } from "stream/consumers";
+import * as yup from 'yup'
+import path from "path";
 
+const validationSchema = yup.object({
+
+    sku: yup.string().required(),
+    name: yup.string().required(),
+    description : yup.string().required(),
+    price: yup.number().required()
+})
 
 export const ProductRegister:React.FC = () =>{
 
@@ -26,15 +34,26 @@ export const ProductRegister:React.FC = () =>{
             name,
             description
         }
-        if(id){
 
-            service.update(product)
-            .then(response => setMessages([{type:"success",text:"Produto atualizado com sucesso!"}]))
-        }
-        service.save(product)
-        .then(productResponse => {
-            setId(productResponse.id)
-            setRegistration(productResponse.registration)
+        validationSchema.validate(product).then(obj => {
+
+            if(id){
+    
+                service.update(product)
+                .then(response => setMessages([{type:"success",text:"Produto atualizado com sucesso!"}]))
+            }else{
+    
+                service.save(product)
+                .then(productResponse => {
+                    setId(productResponse.id)
+                    setRegistration(productResponse.registration)
+                })
+            }
+        }).catch(err => {
+            const field = err.path;
+            const message = err.message;
+
+            setMessages([{text:message, type:"danger", field}])
         })
     }
 
