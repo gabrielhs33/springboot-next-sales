@@ -1,9 +1,9 @@
-import { Layout } from "components";
+import { Layout, Input, Message } from "components";
 import { useState } from "react";
-import { Input } from "components";
 import { useProductService } from 'app/services'
 import { Product } from 'app/models/products'
 import { convertToBigDecimal } from 'app/util/money'
+
 
 export const ProductRegister:React.FC = () =>{
 
@@ -39,6 +39,7 @@ export const ProductRegister:React.FC = () =>{
     return(
        <Layout title = "Produtos">
         
+            <Message text="atualizado com sucesso" type="success"/>
             { id &&
 
                 <div className="columns">

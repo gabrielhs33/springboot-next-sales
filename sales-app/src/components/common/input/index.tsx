@@ -24,7 +24,6 @@ export const Input:React.FC<InputProps> = ({
         let value =  event.target.value;
         if(value && currency){
             value = formatReal(value);
-            console.log(value)
         }
 
         if(onChange){
