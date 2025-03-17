@@ -1,11 +1,12 @@
 import { ChangeEvent, HTMLAttributes, InputHTMLAttributes } from "react";
+import { formatReal } from 'app/util/money'
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
-
-    id: string
-    onChange?: (value: any) => void;
+interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
+    id: string;
+    onChange?: (value: string) => void; 
     label: string;
     columnClass?: string;
+    currency?: boolean;
 }
 
 export const Input:React.FC<InputProps> = ({
@@ -13,9 +14,23 @@ export const Input:React.FC<InputProps> = ({
     label,
     columnClass,
     id,
+    currency,
     ...inputProps
 
 }:InputProps) =>{
+
+    const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+
+        let value =  event.target.value;
+        if(value && currency){
+            value = formatReal(value);
+            console.log(value)
+        }
+
+        if(onChange){
+            onChange(value) 
+        }
+    }
 
     return(
         <div className={`column ${columnClass}`}>
@@ -25,12 +40,8 @@ export const Input:React.FC<InputProps> = ({
                 <div className="control">
                     <input className="input" 
                             id = {id} {...inputProps}
-                            onChange={event => {
-                                if(onChange){
-                                    onChange(event.target.value)
-                                }
-                            }}
-                            placeholder={inputProps.placeholder}/>
+                            onChange={onInputChange}
+                           />
                 </div>
             </div>
         </div>
