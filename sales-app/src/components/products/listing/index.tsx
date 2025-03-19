@@ -2,17 +2,16 @@ import { Layout } from "@/components/layout"
 import Link from "next/link"
 import { ProductTable } from "./table"
 import { Product } from "@/app/models/products"
+import useSWR from "swr"
+import { httpClient } from 'app/http'
+import { AxiosResponse } from "axios"
 
 export const ProductListing: React.FC = () => {
 
-    const products: Product[] = [{
-        id:"1",sku:"sadsaas",name:"nadsaas",price:250,
-        
-    },
-    {
-        id:"1",sku:"sadsaas",name:"nadsaas",price:250,
-        
-    }]
+    const products: Product[] = []
+    const { data:result, error } = useSWR<AxiosResponse<Product[]>>('api/products', url => httpClient.get(url))
+
+    if (!result) return <Layout title="Carregando...">Carregando...</Layout>
 
     return(
         <Layout title="Listagem Produtos">
@@ -21,7 +20,7 @@ export const ProductListing: React.FC = () => {
             </Link>
            
             <br />
-            <ProductTable products={products}/>
+            <ProductTable products={result.data}/>
 
            
         </Layout>

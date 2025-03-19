@@ -14,10 +14,12 @@ export const ProductTable:React.FC <ProductTableProps> = ({
 
         <table className="table is-striped is-hoverable">
           <thead>
-            <th>Código</th>
-            <th>SKU</th>
-            <th>Nome</th>
-            <th>Preço</th>
+                <tr>
+                    <th>Código</th>
+                    <th>SKU</th>
+                    <th>Nome</th>
+                    <th>Preço</th>
+                </tr>
           </thead>
           <tbody>
             {
