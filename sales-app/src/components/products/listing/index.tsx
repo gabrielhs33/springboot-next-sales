@@ -11,17 +11,24 @@ export const ProductListing: React.FC = () => {
 
     const products: Product[] = []
     const { data:result, error } = useSWR<AxiosResponse<Product[]>>('api/products', url => httpClient.get(url))
+    const edit = (product:Product) => {
 
+        console.log(product)
+    }
+
+    const delet = (product:Product) =>{
+        console.log(product)
+    }
     
     return(
         <Layout title="Listagem Produtos">
             <Link href="/registrations/products">
                 <button className="button is-warning">Novo</button>
             </Link>
-           
+            <br />
             <br />
             <Loader show={!result}/>
-            <ProductTable products={result?.data || []}/>
+            <ProductTable onEdit={edit} onDelete={delet} products={result?.data || []}/>
 
            
         </Layout>

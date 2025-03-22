@@ -20,8 +20,7 @@ public class ProductController {
     private ProductRepository repository;
 
     @GetMapping
-    public List<ProductFormRequest> getList() throws InterruptedException {
-        Thread.sleep(5000);
+    public List<ProductFormRequest> getList() {
         return repository.findAll().stream().map(ProductFormRequest::fromModel).collect(Collectors.toList());
     }
 
